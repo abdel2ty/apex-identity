@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { ar } from "@/locales/ar";
 import { en } from "@/locales/en";
-import type { Translations } from "@/locales/ar";
+import type { Translations } from "@/locales/types"; // ✅ صححت السطر هنا
 
 type Language = "ar" | "en";
 
