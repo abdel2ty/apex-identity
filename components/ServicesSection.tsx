@@ -4,8 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { useLanguage } from "@/hooks/useLanguage";
 
-// ─── Master feature list (order matters — shown in all cards) ───────────────
-// EN → AR mapping so we show the right label per language
+// ─── Master feature list
 const ALL_FEATURES_EN = [
   "Comprehensive Career Identity Audit",
   "ATS-Optimized, High-Impact CV",
@@ -38,15 +37,21 @@ const ALL_FEATURES_AR = [
   "دعم أولوي لمدة ٣٠ يوماً",
 ];
 
-// Which features each package INCLUDES (by index in the master list above)
 const PACKAGE_INCLUDES = [
-  // Foundation — first 4
   new Set([0, 1, 2, 3]),
-  // Pro — first 8
   new Set([0, 1, 2, 3, 4, 5, 6, 7]),
-  // Elite — all 13
   new Set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
 ];
+
+// ─── Type Definition لحل مشكلة any
+type ServicePackage = {
+  name: string;
+  name_ar: string;
+  ideal: string;
+  transformation: string;
+  features: string[];
+  popular?: boolean;
+};
 
 export default function ServicesSection() {
   const { t, lang } = useLanguage();
@@ -54,6 +59,9 @@ export default function ServicesSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   const allFeatures = lang === "ar" ? ALL_FEATURES_AR : ALL_FEATURES_EN;
+
+  // تحويل المصفوفة لنوع معرف
+  const packages: ServicePackage[] = t.services.packages;
 
   return (
     <section id="services" ref={ref} className="section-padding bg-apex-dark relative overflow-hidden">
@@ -84,7 +92,7 @@ export default function ServicesSection() {
 
         {/* Cards */}
         <div className="grid lg:grid-cols-3 gap-6 lg:items-stretch">
-          {t.services.packages.map((pkg, i) => (
+          {packages.map((pkg, i) => (
             <PackageCard
               key={i}
               pkg={pkg}
@@ -115,7 +123,7 @@ function PackageCard({
   allFeatures,
   included,
 }: {
-  pkg: { name: string; name_ar: string; ideal: string; transformation: string; features: string[]; popular?: boolean };
+  pkg: ServicePackage;
   index: number;
   inView: boolean;
   popular?: boolean;
@@ -167,7 +175,7 @@ function PackageCard({
             </p>
           </div>
 
-          {/* Full master feature list — unavailable ones are faded + strikethrough */}
+          {/* Full master feature list */}
           <ul className="space-y-3 mb-8 flex-1">
             {allFeatures.map((feature, fi) => {
               const isIncluded = included.has(fi);
@@ -178,7 +186,6 @@ function PackageCard({
                     isIncluded ? "" : "opacity-[0.28]"
                   }`}
                 >
-                  {/* Icon */}
                   <div className="mt-[3px] flex-shrink-0 w-4 h-4 flex items-center justify-center">
                     {isIncluded ? (
                       <svg className={`w-4 h-4 ${popular ? "text-apex-gold" : "text-apex-gold/70"}`} viewBox="0 0 16 16" fill="none">
@@ -191,7 +198,6 @@ function PackageCard({
                     )}
                   </div>
 
-                  {/* Label */}
                   <span
                     className={`text-[15.5px] leading-snug ${
                       isIncluded
