@@ -50,7 +50,7 @@ export default function ComparisonTable() {
           </div>
 
           {/* Rows */}
-          {t.comparison.rows.map((row, i) => (
+          {t.comparison.rows.map((row: { feature: string; typical: string; apex: string }, i: number) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, x: lang === "ar" ? 20 : -20 }}
