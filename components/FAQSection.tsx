@@ -34,7 +34,7 @@ export default function FAQSection() {
         </motion.div>
 
         <div className="space-y-2">
-          {t.faq.items.map((item, i) => (
+          {t.faq.items.map((item: { q: string; a: string }, i: number) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
