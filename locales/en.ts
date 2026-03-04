@@ -1,7 +1,7 @@
-import type { Translations } from "./ar";
+import type { Translations } from "./types";
 
 export const en: Translations = {
-  dir: "ltr" as const,
+  dir: "ltr",
   lang: "en",
   font: "english",
 
