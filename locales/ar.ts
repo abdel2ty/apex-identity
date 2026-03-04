@@ -1,5 +1,7 @@
-export const ar = {
-  dir: "rtl" as const,
+import type { Translations } from "./types";
+
+export const ar: Translations = {
+  dir: "rtl",
   lang: "ar",
   font: "arabic",
 
@@ -263,5 +265,3 @@ export const ar = {
     ],
   },
 };
-
-export type Translations = typeof ar;
