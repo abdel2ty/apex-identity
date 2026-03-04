@@ -1,0 +1,296 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --apex-black: #050507;
+  --apex-dark: #0A0A0F;
+  --apex-card: #0F0F17;
+  --apex-border: #1A1A28;
+  --apex-gold: #C9A84C;
+  --apex-gold-light: #E8C97A;
+  --apex-gold-dim: #8B6F2E;
+  --apex-silver: #9BA3B2;
+  --apex-white: #F0EDE8;
+  --apex-cream: #E8E0D0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Arabic font when dir=rtl */
+[dir="rtl"] body,
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] p,
+[dir="rtl"] span,
+[dir="rtl"] button,
+[dir="rtl"] a,
+[dir="rtl"] li {
+  font-family: "Cairo", "IBM Plex Sans Arabic", sans-serif;
+}
+
+/* English font when dir=ltr */
+[dir="ltr"] body,
+[dir="ltr"] p,
+[dir="ltr"] span,
+[dir="ltr"] button,
+[dir="ltr"] a,
+[dir="ltr"] li {
+  font-family: "DM Sans", sans-serif;
+}
+
+[dir="ltr"] h1,
+[dir="ltr"] h2,
+[dir="ltr"] h3,
+[dir="ltr"] h4 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+/* Gold text gradient */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effects */
+.glow-gold {
+  box-shadow: 0 0 30px rgba(201, 168, 76, 0.15), 0 0 60px rgba(201, 168, 76, 0.08);
+}
+
+.glow-gold-hover:hover {
+  box-shadow: 0 0 40px rgba(201, 168, 76, 0.25), 0 0 80px rgba(201, 168, 76, 0.12);
+}
+
+/* Animated gradient border */
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.border-animated {
+  position: relative;
+}
+
+.border-animated::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #C9A84C, #E8C97A, #8B6F2E, #C9A84C);
+  background-size: 300% 300%;
+  animation: gradientShift 3s ease infinite, borderGlow 2s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--apex-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--apex-gold-dim);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--apex-gold);
+}
+
+/* Noise texture overlay */
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* Section spacing */
+.section-padding {
+  @apply py-24 md:py-32 lg:py-40;
+}
+
+/* Prose styles for legal pages */
+.prose-apex h2 {
+  color: var(--apex-white);
+  margin-bottom: 0.5rem;
+}
+
+.prose-apex p {
+  color: var(--apex-silver);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+/* Input styles */
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px rgba(201, 168, 76, 0.3);
+}
+
+/* Ensure mobile menu links are clickable */
+.mobile-nav-link {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(201, 168, 76, 0.1);
+}
+
+/* ──────────────────────────────────────────────
+   Presentation-style scroll reveal animations
+────────────────────────────────────────────── */
+
+/* Reveal on scroll — base */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smooth section transitions */
+section {
+  position: relative;
+}
+
+/* Presentation mode — sections feel like slides */
+@media (prefers-reduced-motion: no-preference) {
+  .section-padding {
+    transition: opacity 0.6s ease;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   Enhanced card hover states
+────────────────────────────────────────────── */
+.card-lift {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(201,168,76,0.06);
+}
+
+/* ──────────────────────────────────────────────
+   Modern cursor — subtle gold dot trail  
+────────────────────────────────────────────── */
+@media (pointer: fine) {
+  * { cursor: none !important; }
+
+  #custom-cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 8px; height: 8px;
+    background: #C9A84C;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
+    mix-blend-mode: difference;
+  }
+
+  #custom-cursor-ring {
+    position: fixed;
+    top: 0; left: 0;
+    width: 32px; height: 32px;
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, border-color 0.2s ease;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   Section transition lines
+────────────────────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,168,76,0.15), transparent);
+}
+
+/* ──────────────────────────────────────────────
+   Testimonial track — pause on hover
+────────────────────────────────────────────── */
+.testimonial-track:hover > * {
+  animation-play-state: paused;
+}
+
+/* ──────────────────────────────────────────────
+   Text shimmer effect for headings
+────────────────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.text-shimmer {
+  background: linear-gradient(90deg, #C9A84C 0%, #E8C97A 40%, #C9A84C 60%, #8B6F2E 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ──────────────────────────────────────────────
+   Testimonial infinite scroll — CSS keyframes
+   Cards are 380px wide, gap 0px, 3 sets of N cards
+   We animate exactly -33.333% (one set width) for seamless loop
+────────────────────────────────────────────── */
+@keyframes scroll-ltr {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.3334%); }
+}
+
+@keyframes scroll-rtl {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(33.3334%); }
+}
+
+.testimonial-track-ltr {
+  animation: scroll-ltr 28s linear infinite;
+}
+
+.testimonial-track-rtl {
+  animation: scroll-rtl 28s linear infinite;
+}
+
+.testimonial-track-ltr:hover,
+.testimonial-track-rtl:hover {
+  animation-play-state: paused;
+}
+
+/* Ensure cards have no margin or gap between them */
+.testimonial-track-ltr > *,
+.testimonial-track-rtl > * {
+  flex-shrink: 0;
+  margin: 0;
+}
