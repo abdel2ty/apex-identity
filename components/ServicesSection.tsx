@@ -46,7 +46,7 @@ const PACKAGE_INCLUDES = [
 // ─── Type Definition لحل مشكلة any
 type ServicePackage = {
   name: string;
-  name_ar: string;
+  name_ar?: string; // ✅ جعلناه اختياري
   ideal: string;
   transformation: string;
   features: string[];
@@ -161,7 +161,7 @@ function PackageCard({
           {/* Package name */}
           <div className="mb-6">
             <h3 className={`text-apex-white mb-1 ${lang === "en" ? "font-serif text-3xl font-medium" : "text-xl font-bold"}`}>
-              {lang === "ar" ? pkg.name_ar : pkg.name}
+              {lang === "ar" ? pkg.name_ar ?? pkg.name : pkg.name}
             </h3>
             <p className="text-apex-silver/60 text-sm">{pkg.ideal}</p>
           </div>
