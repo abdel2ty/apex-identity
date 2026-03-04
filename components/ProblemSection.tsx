@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { useLanguage } from "@/hooks/useLanguage";
 
@@ -10,10 +9,17 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 };
 
+type ProblemItem = {
+  title: string;
+  desc: string;
+};
+
 export default function ProblemSection() {
   const { t, lang } = useLanguage();
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  const items: ProblemItem[] = t.problem.items; // تحديد النوع هنا
 
   return (
     <section id="problem" ref={ref} className="section-padding bg-apex-dark relative overflow-hidden">
@@ -55,7 +61,7 @@ export default function ProblemSection() {
 
         {/* Problem cards */}
         <div className="grid md:grid-cols-2 gap-5">
-          {t.problem.items.map((item, i) => (
+          {items.map((item, i) => (
             <ProblemCard key={i} title={item.title} desc={item.desc} index={i} inView={inView} lang={lang} />
           ))}
         </div>
@@ -95,9 +101,7 @@ function ProblemCard({
       </div>
 
       <h3
-        className={`text-apex-white mb-4 ${
-          lang === "en" ? "text-xl font-medium" : "text-xl font-bold"
-        }`}
+        className={`text-apex-white mb-4 ${lang === "en" ? "text-xl font-medium" : "text-xl font-bold"}`}
       >
         {title}
       </h3>
