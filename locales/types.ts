@@ -7,6 +7,12 @@ export interface Translations {
   lang: string;
   font: string;
 
+  authority: {
+    label: string;
+    headline: string;
+    points: AuthorityPoint[];
+  };
+
   nav: any;
   hero: any;
   problem: any;
