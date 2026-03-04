@@ -1,6 +1,9 @@
-// locales/types.ts
-
 export type Direction = "rtl" | "ltr";
+
+export interface AuthorityPoint {
+  title: string;
+  desc: string;
+}
 
 export interface Translations {
   dir: Direction;
@@ -13,6 +16,7 @@ export interface Translations {
     points: AuthorityPoint[];
   };
 
+  // مؤقتًا سيب الباقي any
   nav: any;
   hero: any;
   problem: any;
@@ -20,7 +24,6 @@ export interface Translations {
   services: any;
   comparison: any;
   social_proof: any;
-  authority: any;
   cta: any;
   faq: any;
   footer: any;
