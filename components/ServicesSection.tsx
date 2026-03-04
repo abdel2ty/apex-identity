@@ -43,10 +43,10 @@ const PACKAGE_INCLUDES = [
   new Set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
 ];
 
-// ─── Type Definition لحل مشكلة any
+// ─── Type Definition
 type ServicePackage = {
   name: string;
-  name_ar?: string; // ✅ جعلناه اختياري
+  name_ar?: string;
   ideal: string;
   transformation: string;
   features: string[];
@@ -100,8 +100,8 @@ export default function ServicesSection() {
               inView={inView}
               popular={pkg.popular}
               lang={lang}
-              cta={t.services.cta}
-              badge={t.services.popular_badge}
+              cta={t.services.cta ?? ""}
+              badge={t.services.popular_badge ?? ""} // ✅ إضافة القيمة الافتراضية
               allFeatures={allFeatures}
               included={PACKAGE_INCLUDES[i]}
             />
