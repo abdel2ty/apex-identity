@@ -32,7 +32,6 @@ export default function AuthoritySection() {
               {t.authority.headline}
             </h2>
 
-            {/* Large decorative number */}
             <div className="hidden lg:block mt-16">
               <div className="text-[120px] font-bold leading-none text-apex-gold/5 select-none">
                 A
@@ -42,7 +41,7 @@ export default function AuthoritySection() {
 
           {/* Right: Points */}
           <div className="space-y-6">
-            {t.authority.points.map((point, i) => (
+            {t.authority.points.map((point: { title: string; desc: string }, i: number) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, x: lang === "ar" ? -30 : 30 }}
