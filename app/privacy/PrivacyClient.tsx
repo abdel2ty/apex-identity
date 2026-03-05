@@ -26,16 +26,6 @@ export default function PrivacyClient() {
         </Section>
 
         <Section
-          headingAr="كيف نستخدم معلوماتك"
-          headingEn="How We Use Your Information"
-          isAr={isAr}
-        >
-          {isAr
-            ? "نستخدم معلوماتك لتقديم خدماتنا الاستراتيجية، التواصل معك بشأن طلبك، وتحسين منتجاتنا. لن نبيع معلوماتك لأطراف ثالثة أو نشاركها لأغراض تسويقية بدون موافقتك الصريحة."
-            : "We use your information to deliver our strategic services, communicate with you about your inquiry, and improve our offerings. We will never sell your information to third parties or share it for marketing purposes without your explicit consent."}
-        </Section>
-
-        <Section
           headingAr="حماية البيانات"
           headingEn="Data Protection"
           isAr={isAr}
@@ -71,8 +61,8 @@ export default function PrivacyClient() {
           isAr={isAr}
         >
           {isAr
-            ? "لأي استفسارات تتعلق بسياسة الخصوصية، تواصل معنا عبر: privacy@apexidentity.com"
-            : "For any privacy-related inquiries, contact us at: privacy@apexidentity.com"}
+            ? "لأي استفسارات تتعلق بسياسة الخصوصية، تواصل معنا عبر: ٠١٠٦٧٣٩٤٩٤٢ "
+            : "For any privacy-related inquiries, contact us at: (+20) 01067394942"}
         </Section>
       </div>
     </LegalPageShell>

@@ -44,7 +44,7 @@ export default function CTASection() {
           {/* CTA Button */}
           <div className="flex flex-col items-center gap-6">
             <a
-              href="https://wa.me/201012857997?text=مرحبًا،%20حابب%20احجز%20جلسه%20استشارية%20مع%20فريق%20Apex%20Identity."
+              href="https://wa.me/201067394942?text=السلام%20عليكم،%20حابب%20أحجز%20جلسة%20مع%20فريق%20Apex%20Identity%20عشان%20نرتب%20خطوات%20تطوير%20مساري%20المهني."
               target="_blank"
               className="group relative inline-flex items-center gap-3 px-10 py-5 bg-apex-gold text-apex-black font-semibold text-base tracking-wide overflow-hidden transition-all duration-300 hover:scale-[1.03] glow-gold"
             >

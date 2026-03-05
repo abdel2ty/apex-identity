@@ -74,15 +74,33 @@ export const en: Translations = {
     ],
   },
   social_proof: {
-    label: "Real Results",
-    headline: "Documented transformations",
-    verify: "Verify Testimonial",
-    testimonials: [
-      { name: "Ahmed Al-Rashid", role: "Product Manager — Dubai", story: "I applied for months without responses. After Apex, I started receiving offers from companies I hadn’t even applied to.", result: "3 international offers in 45 days", link: "https://linkedin.com" },
-      { name: "Sara Al-Mansour", role: "Digital Marketing Consultant — London", story: "My LinkedIn profile existed but produced nothing. Now I get 20+ connection requests weekly from recruiters.", result: "400% increase in connection requests", link: "https://linkedin.com" },
-      { name: "Khaled Ibrahim", role: "Software Engineer — Canada", story: "I negotiated with confidence for the first time and got 35% higher salary than what I would have accepted before Apex.", result: "35% salary increase", link: "https://linkedin.com" },
-    ],
-  },
+  label: "Real Results",
+  headline: "Documented transformations",
+  verify: "Verify Review",
+  testimonials: [
+    {
+      name: "Be the first to comment",
+      role: "Share your experience",
+      story: "Tell us about your experience with Apex Identity here.",
+      result: "Add your review now",
+      link: "#",
+    },
+    {
+      name: "Share your story",
+      role: "Your feedback matters",
+      story: "Let us know how our services helped you grow professionally.",
+      result: "Leave your review here",
+      link: "#",
+    },
+    {
+      name: "Add your review",
+      role: "Join our community",
+      story: "Help others by sharing your experience with Apex Identity.",
+      result: "Be the first to leave a review",
+      link: "#",
+    },
+  ],
+},
   authority: {
     label: "The Difference",
     headline: "Methodology built on strategy, not templates",

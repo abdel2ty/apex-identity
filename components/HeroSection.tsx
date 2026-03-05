@@ -26,7 +26,7 @@ function ParticleCanvas() {
     let H = (canvas.height = canvas.offsetHeight);
     let raf: number;
     const COUNT = Math.min(90, Math.floor((W * H) / 14000));
-    type Particle = { x: number; y: number; vx: number; vy: number; r: number; alpha: number; alphaDir: number; };
+    type Particle = { x: number; y: number; vx: number; vy: number; r: number; alpha: number; alphaDir: number };
     const particles: Particle[] = Array.from({ length: COUNT }, () => ({
       x: Math.random() * W, y: Math.random() * H,
       vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.18,
@@ -130,53 +130,58 @@ function OrbitingRings() {
   );
 }
 
-
 export default function HeroSection() {
   const { t, lang } = useLanguage();
   const ref = useRef<HTMLElement>(null);
+
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0.55, 0.95], [1, 0]);
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+
+  // ── Parallax layers — each moves at a different speed, nothing fades out
+  const bgDeepY   = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);  // grid — slowest
+  const bgMidY    = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);  // aurora + rings
+  const bgNearY   = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);  // particles
+  const contentY  = useTransform(scrollYProgress, [0, 1], ["0%", "8%"]);   // content — barely moves
+  const scanY     = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);  // scan line — fastest
 
   return (
     <section ref={ref} className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-apex-black">
-      {/* Layer 1: Geometric grid */}
-      <motion.div style={{ y: bgY }} className="absolute inset-0">
+
+      {/* Layer 1 — Grid (deepest, slowest) */}
+      <motion.div style={{ y: bgDeepY }} className="absolute inset-0">
         <GeometricLines />
       </motion.div>
 
-      {/* Layer 2: Aurora glow */}
-      <motion.div style={{ y: bgY }} className="absolute inset-0">
+      {/* Layer 2 — Aurora glow */}
+      <motion.div style={{ y: bgMidY }} className="absolute inset-0">
         <AuroraLayer />
       </motion.div>
 
-      {/* Layer 3: Orbiting rings */}
-      <motion.div style={{ y: bgY }} className="absolute inset-0">
+      {/* Layer 3 — Orbiting rings */}
+      <motion.div style={{ y: bgMidY }} className="absolute inset-0">
         <OrbitingRings />
       </motion.div>
 
-      {/* Layer 4: Particle canvas */}
-      <motion.div style={{ y: bgY }} className="absolute inset-0">
+      {/* Layer 4 — Particles (nearer) */}
+      <motion.div style={{ y: bgNearY }} className="absolute inset-0">
         <ParticleCanvas />
       </motion.div>
 
-      {/* Layer 5: Horizontal scan line */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      {/* Layer 5 — Scan line (fastest, creates motion sense) */}
+      <motion.div style={{ y: scanY }} className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <motion.div
           className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-apex-gold/20 to-transparent"
           animate={{ y: ["0vh", "100vh"] }}
           transition={{ duration: 8, repeat: Infinity, ease: "linear", repeatDelay: 4 }}
         />
-      </div>
+      </motion.div>
 
-      {/* Top edge — smooth radial fade, no hard line */}
+      {/* Top edge */}
       <div className="absolute top-0 inset-x-0 h-48 pointer-events-none z-10"
         style={{ background: "radial-gradient(ellipse 100% 100% at 50% 0%, rgba(5,5,7,0.95) 0%, rgba(5,5,7,0.6) 40%, transparent 100%)" }} />
 
-      {/* Content */}
+      {/* Content — moves least, stays crisp and readable throughout scroll */}
       <motion.div
-        style={{ y: contentY, opacity: contentOpacity }}
+        style={{ y: contentY }}
         className="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-20"
       >
         <motion.div
@@ -220,24 +225,24 @@ export default function HeroSection() {
 
           {/* CTAs */}
           <motion.div variants={stagger.item} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <motion.a href="#apply" className="group relative px-8 py-4 bg-apex-gold text-apex-black font-semibold text-sm tracking-wide overflow-hidden"
+            <motion.a href="#apply"
+              className="group relative px-8 py-4 bg-apex-gold text-apex-black font-semibold text-sm tracking-wide overflow-hidden"
               whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}
               animate={{ boxShadow: ["0 0 0px rgba(201,168,76,0)", "0 0 25px rgba(201,168,76,0.25)", "0 0 0px rgba(201,168,76,0)"] }}
               transition={{ boxShadow: { duration: 3, repeat: Infinity, ease: "easeInOut" } }}>
               <span className="relative z-10">{t.hero.cta_primary}</span>
               <motion.div className="absolute inset-0 bg-apex-gold-light" initial={{ scaleX: 0 }} whileHover={{ scaleX: 1 }} transition={{ duration: 0.3 }} style={{ originX: 0 }} />
             </motion.a>
-            <motion.a href="#system" className="px-8 py-4 border border-apex-border text-apex-silver hover:text-apex-white hover:border-apex-gold/40 text-sm tracking-wide transition-colors duration-300"
+            <motion.a href="#system"
+              className="px-8 py-4 border border-apex-border text-apex-silver hover:text-apex-white hover:border-apex-gold/40 text-sm tracking-wide transition-colors duration-300"
               whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               {t.hero.cta_secondary}
             </motion.a>
           </motion.div>
-
-
         </motion.div>
       </motion.div>
 
-      {/* Bottom — smooth gradient fade into next section */}
+      {/* Bottom fade */}
       <div className="absolute bottom-0 inset-x-0 h-56 pointer-events-none z-10"
         style={{ background: "linear-gradient(to top, rgba(5,5,7,1) 0%, rgba(5,5,7,0.85) 30%, rgba(5,5,7,0.4) 65%, transparent 100%)" }} />
 
