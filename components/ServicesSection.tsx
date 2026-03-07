@@ -45,39 +45,65 @@ const IconRoadmap = () => (
     <circle cx="21" cy="17" r="1.5" fill="currentColor" stroke="none" />
   </svg>
 );
+const IconAudit = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="currentColor" strokeWidth="1.4">
+    <path d="M9 11l3 3L22 4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
 
 // ─── Individual services data
 const SERVICES_EN = [
   { icon: <IconCV />, tag: "Document", name: "ATS-Optimized CV", desc: "A strategically engineered resume that passes ATS filters and compels hiring managers to act — not just read.", deliverables: ["ATS keyword audit & integration", "Achievement-led narrative", "Visual hierarchy redesign", "2 revision rounds"], duration: "1–2 days" },
-
   { icon: <IconLinkedIn />, tag: "Profile", name: "LinkedIn Authority Profile", desc: "Transform your LinkedIn from a digital tombstone into a 24/7 opportunity magnet that speaks directly to your target market.", deliverables: ["Headline & summary rewrite", "Experience repositioning", "Skills & endorsements strategy", "SEO optimization"], duration: "2–3 days" },
-
   { icon: <IconWeb />, tag: "Website", name: "Personal Professional Website", desc: "A custom-built personal brand hub that establishes undeniable authority and differentiates you from every other candidate.", deliverables: ["Custom domain setup", "Portfolio & about pages", "Contact & lead capture", "Mobile-first design"], duration: "3–5 days" },
-
   { icon: <IconPortfolio />, tag: "Presentation", name: "Portfolio / Case Study Deck", desc: "A high-impact presentation that turns your experience into a compelling story investors, clients, and employers can't ignore.", deliverables: ["Story architecture", "Visual case studies", "Metrics & impact framing", "PDF + slide formats"], duration: "3–5 days" },
-
   { icon: <IconInterview />, tag: "Coaching", name: "Interview Kit + AI Simulation", desc: "A battle-tested interview system — strategic answer frameworks, personalized story bank, and live AI practice sessions.", deliverables: ["STAR method training", "Top 30 Q&A bank", "3 AI simulation sessions", "Offer negotiation prep"], duration: "7–10 days" },
-
   { icon: <IconRoadmap />, tag: "Strategy", name: "6-Month Career Roadmap", desc: "A precision-mapped growth plan with milestones, target companies, skill gaps, and a month-by-month execution framework.", deliverables: ["Market opportunity analysis", "Skill gap roadmap", "Target company list", "Monthly milestone plan"], duration: "Delivered in 3 days" },
 ];
 
 const SERVICES_AR = [
   { icon: <IconCV />, tag: "وثيقة", name: "سيرة ذاتية متوافقة مع ATS", desc: "سيرة ذاتية مُهندَسة استراتيجياً تتخطى فلاتر ATS وتجبر مديري التوظيف على التصرف — لا مجرد القراءة.", deliverables: ["تدقيق ودمج كلمات ATS المفتاحية", "سرد قائم على الإنجازات", "إعادة تصميم التسلسل البصري", "جولتان للمراجعة"], duration: "١–٢ يوم" },
-
   { icon: <IconLinkedIn />, tag: "ملف", name: "ملف LinkedIn للسلطة المهنية", desc: "حوّل LinkedIn من شاهد قبر رقمي إلى مغناطيس فرص يعمل ٢٤/٧ ويخاطب سوقك المستهدف مباشرة.", deliverables: ["إعادة كتابة العنوان والملخص", "إعادة تموضع الخبرات", "استراتيجية المهارات والتوصيات", "تحسين SEO"], duration: "٢–٣ أيام" },
-
   { icon: <IconWeb />, tag: "موقع", name: "موقع مهني شخصي", desc: "مركز علامة شخصية مخصص يُثبت سلطة لا يمكن إنكارها ويميزك عن كل مرشح آخر.", deliverables: ["إعداد النطاق المخصص", "صفحات البورتفوليو والتعريف", "نموذج تواصل وجذب عملاء", "تصميم mobile-first"], duration: "٣–٥ أيام" },
-
   { icon: <IconPortfolio />, tag: "عرض", name: "بورتفوليو / عرض دراسات حالة", desc: "عرض تقديمي عالي الأثر يحوّل خبراتك إلى قصة مقنعة لا يستطيع المستثمرون والعملاء وأصحاب العمل تجاهلها.", deliverables: ["هندسة القصة السردية", "دراسات حالة بصرية", "إطار الأرقام والأثر", "صيغتا PDF والشرائح"], duration: "٣–٥ أيام" },
-
   { icon: <IconInterview />, tag: "تدريب", name: "حزمة المقابلات + محاكاة AI", desc: "نظام مقابلات مُجرَّب — أطر إجابات استراتيجية، بنك قصص شخصي، وجلسات تدريب مباشرة بالذكاء الاصطناعي.", deliverables: ["تدريب على منهج STAR", "بنك ٣٠ سؤال وإجابة", "٣ جلسات محاكاة AI", "إعداد تفاوض على العرض"], duration: "٧–١٠ أيام" },
-
   { icon: <IconRoadmap />, tag: "استراتيجية", name: "خارطة طريق مهنية لـ ٦ أشهر", desc: "خطة نمو مُعدَّة بدقة تشمل مراحل، شركات مستهدفة، فجوات مهارية، وإطار تنفيذ شهري.", deliverables: ["تحليل الفرص السوقية", "خارطة الفجوات المهارية", "قائمة الشركات المستهدفة", "خطة مراحل شهرية"], duration: "تُسلَّم في ٣ أيام" },
 ];
 
-// ─── Packages feature list
+// ─── Audit deliverables content
+const AUDIT_EN = {
+  badge: "FREE with every package",
+  title: "Comprehensive Career Identity Audit",
+  subtitle: "Before we build anything — we diagnose everything.",
+  desc: "Every package begins with a full professional audit delivered as a structured report. This isn't a sales pitch. It's a real, honest map of where you stand — so you can see our quality before committing to anything.",
+  deliverables: [
+    { label: "Strengths", desc: "What's working in your current professional presence" },
+    { label: "Weaknesses", desc: "Gaps that are actively costing you opportunities" },
+    { label: "Opportunities", desc: "Specific market openings aligned to your profile" },
+    { label: "Market Gaps", desc: "Where demand exists that your positioning doesn't cover" },
+    { label: "Proposed Positioning", desc: "A tailored strategic direction — your unfair advantage" },
+  ],
+  note: "This audit is exclusively included in our packages — not available as a standalone service. Because in our packages, we don't just give you the same individual features. We give you more, better, and at greater value. Our priority is quality, not billing.",
+};
+
+const AUDIT_AR = {
+  badge: "مجاناً مع كل باقة",
+  title: "تدقيق الهوية المهنية الشامل",
+  subtitle: "قبل ما نبني أي حاجة — بنشخّص كل حاجة.",
+  desc: "كل باقة بتبدأ بتدقيق مهني كامل بيتسلّم في صورة تقرير منظّم. ده مش عرض مبيعات. ده خريطة حقيقية وصادقة لوضعك الحالي — عشان تشوف جودتنا بنفسك قبل ما تلتزم بأي حاجة.",
+  deliverables: [
+    { label: "نقاط القوة", desc: "اللي بيشتغل صح في حضورك المهني الحالي" },
+    { label: "نقاط الضعف", desc: "الفجوات اللي بتكلّفك فرص دلوقتي" },
+    { label: "الفرص", desc: "فتحات سوقية محددة متوافقة مع ملفك الشخصي" },
+    { label: "فجوات السوق", desc: "أين يوجد طلب لا يغطيه تموضعك الحالي" },
+    { label: "التموضع المقترح", desc: "اتجاه استراتيجي مخصص — ميزتك التنافسية الفريدة" },
+  ],
+  note: "التدقيق ده حصري في باقاتنا — مش متاح كخدمة منفردة. لأن في الباقات مش بس بنوفرلك نفس مميزات الخدمات الفردية. بنوفرلك أكتر، وأحسن، وبقيمة أعلى. همنا الجودة مش الفلوس.",
+};
+
+// ─── Packages feature list (audit removed — shown separately as free note)
 const ALL_FEATURES_EN = [
-  "Comprehensive Career Identity Audit",
   "ATS-Optimized, High-Impact CV",
   "LinkedIn Authority Profile Optimization",
   "Market Positioning Strategy",
@@ -93,7 +119,6 @@ const ALL_FEATURES_EN = [
 ];
 
 const ALL_FEATURES_AR = [
-  "تدقيق الهوية المهنية الشامل",
   "سيرة ذاتية متوافقة مع ATS وعالية الأثر",
   "تحسين ملف LinkedIn للسلطة المهنية",
   "استراتيجية التموضع في السوق",
@@ -109,9 +134,9 @@ const ALL_FEATURES_AR = [
 ];
 
 const PACKAGE_INCLUDES = [
-  new Set([0, 1, 2, 3]),
-  new Set([0, 1, 2, 3, 4, 5, 6, 7]),
-  new Set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+  new Set([0, 1, 2]),
+  new Set([0, 1, 2, 3, 4, 5, 6]),
+  new Set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]),
 ];
 
 type ServicePackage = {
@@ -138,6 +163,129 @@ const tabContent = {
   exit: { opacity: 0, y: -10, transition: { duration: 0.25 } },
 };
 
+// ─── Audit Banner Component — refined editorial style
+function AuditBanner({ isAr, inView }: { isAr: boolean; inView: boolean }) {
+  const audit = isAr ? AUDIT_AR : AUDIT_EN;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.75, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+      className="mb-12 relative"
+    >
+      <div className="relative bg-apex-card border border-apex-gold/25 overflow-hidden">
+
+        {/* Subtle top rule in gold */}
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-apex-gold/60 to-transparent" />
+
+        {/* Very faint gold wash in background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-apex-gold/[0.04] via-transparent to-transparent pointer-events-none" />
+
+        <div className="relative grid lg:grid-cols-[1fr_auto] gap-0">
+
+          {/* ── Left / Main content */}
+          <div className="p-8 lg:p-10 lg:border-e border-apex-gold/15">
+
+            {/* Top meta row */}
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <span className="px-3 py-1 bg-apex-gold text-apex-black text-[10px] font-black tracking-[0.3em] uppercase">
+                {audit.badge}
+              </span>
+              <div className="h-3 w-px bg-apex-border hidden sm:block" />
+              <span className="text-apex-silver/40 text-[11px] tracking-[0.2em] uppercase">
+                {isAr ? "مشمول في كل باقة" : "Included with every package"}
+              </span>
+            </div>
+
+            {/* Heading */}
+            <h3 className={`text-apex-white mb-2 ${isAr ? "text-2xl font-bold leading-snug" : "font-serif text-3xl font-medium"}`}>
+              {audit.title}
+            </h3>
+            <p className={`text-apex-gold/60 text-[13.5px] tracking-wide mb-5 ${isAr ? "leading-relaxed" : ""}`}>
+              {audit.subtitle}
+            </p>
+            <p className={`text-apex-silver/60 text-[14px] max-w-2xl ${isAr ? "leading-loose" : "leading-relaxed"}`}>
+              {audit.desc}
+            </p>
+          </div>
+
+          {/* ── Right / Deliverables column */}
+          <div className="p-8 lg:p-10 lg:min-w-[320px]">
+            <p className="text-apex-silver/35 text-[10px] tracking-[0.25em] uppercase mb-5">
+              {isAr ? "ما ستجده في التقرير" : "What's in the report"}
+            </p>
+            <ul className="space-y-4">
+              {audit.deliverables.map((item, i) => (
+                <motion.li
+                  key={i}
+                  initial={{ opacity: 0, x: isAr ? 8 : -8 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.4, delay: 0.25 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex items-start gap-3"
+                >
+                  {/* Number */}
+                  <span className="flex-shrink-0 w-5 h-5 mt-px border border-apex-gold/30 flex items-center justify-center text-apex-gold/60 text-[10px] font-semibold">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <p className="text-apex-white text-[13.5px] font-medium leading-tight mb-0.5">{item.label}</p>
+                    <p className="text-apex-silver/45 text-[12px] leading-snug">{item.desc}</p>
+                  </div>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* ── Bottom note bar */}
+        <div className="border-t border-apex-border px-8 lg:px-10 py-4 flex items-center gap-3 bg-apex-black/20">
+          <svg className="w-3.5 h-3.5 text-apex-gold/40 flex-shrink-0" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <circle cx="7" cy="7" r="5.5" />
+            <path d="M7 6.5v3M7 5v.5" strokeLinecap="round" />
+          </svg>
+          <p className={`text-apex-silver/40 text-[12.5px] ${isAr ? "leading-loose" : "leading-relaxed"}`}>
+            {audit.note}
+          </p>
+        </div>
+
+        {/* Bottom rule */}
+        <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-apex-gold/20 to-transparent" />
+      </div>
+    </motion.div>
+  );
+}
+
+// ─── Individual service audit nudge — minimal, editorial
+function AuditNudge({ isAr }: { isAr: boolean }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6, delay: 0.45 }}
+      className="mt-10 relative"
+    >
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-apex-gold/20 to-transparent" />
+      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-apex-gold/20 to-transparent" />
+
+      <div className="py-5 px-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-apex-black/20">
+        <div className="flex items-start gap-3">
+          <svg className="w-3 h-3 text-apex-gold/40 flex-shrink-0 mt-1" viewBox="0 0 12 12" fill="currentColor">
+            <path d="M6 0.5L11.5 6L6 11.5L0.5 6Z" />
+          </svg>
+          <p className={`text-apex-silver/45 text-[13px] ${isAr ? "leading-loose" : "leading-relaxed"}`}>
+            {isAr ? (
+              <><span className="text-apex-white/65 font-medium">تدقيق الهوية المهنية الشامل</span> متاح حصرياً مع الباقات — الباقات مش بس بتجمع الخدمات الفردية. بتوفرلك أكتر، أحسن، وبقيمة أعلى. همنا الجودة مش الفلوس.</>
+            ) : (
+              <><span className="text-apex-white/65 font-medium">The Career Identity Audit</span> is exclusive to packages — packages don't just bundle individual services. They deliver more, better, and at greater value. Our priority is quality, not billing.</>
+            )}
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 // ────────────────────────────────────────────────────────
 export default function ServicesSection() {
   const { t, lang } = useLanguage();
@@ -152,17 +300,17 @@ export default function ServicesSection() {
   const isAr = lang === "ar";
 
   const tabs = [
-  {
-    id: "packages" as const,
-    label: isAr ? "الباقات الكاملة" : "Full Packages",
-    sub: isAr ? "منظومة متكاملة" : "Complete system",
-  },
-  {
-    id: "individual" as const,
-    label: isAr ? "الخدمات الفردية" : "Individual Services",
-    sub: isAr ? "اختر ما يناسبك" : "Choose what you need",
-  },
-];
+    {
+      id: "packages" as const,
+      label: isAr ? "الباقات الكاملة" : "Full Packages",
+      sub: isAr ? "منظومة متكاملة" : "Complete system",
+    },
+    {
+      id: "individual" as const,
+      label: isAr ? "الخدمات الفردية" : "Individual Services",
+      sub: isAr ? "اختر ما يناسبك" : "Choose what you need",
+    },
+  ];
 
   return (
     <section
@@ -206,7 +354,6 @@ export default function ServicesSection() {
           className="flex justify-center mb-14"
         >
           <div className="relative flex bg-apex-card border border-apex-border p-1 gap-1">
-            {/* Sliding indicator */}
             <motion.div
               className="absolute top-1 bottom-1 bg-apex-gold/10 border border-apex-gold/25"
               layout
@@ -244,6 +391,9 @@ export default function ServicesSection() {
               animate="show"
               exit="exit"
             >
+              {/* ── FREE AUDIT BANNER */}
+              <AuditBanner isAr={isAr} inView={inView} />
+
               {/* Packages grid */}
               <div className="grid lg:grid-cols-3 gap-6 lg:items-stretch">
                 {packages.map((pkg, i) => (
@@ -373,15 +523,18 @@ export default function ServicesSection() {
                 ))}
               </div>
 
+              {/* ── AUDIT NUDGE for individual tab */}
+              <AuditNudge isAr={isAr} />
+
               {/* Nudge to packages */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className="mt-10 text-center"
+                className="mt-6 text-center"
               >
                 <p className="text-apex-silver/40 text-sm">
-                  {isAr ? "تريد المنظومة الكاملة؟" : "Want the complete system?"}{" "}
+                  {isAr ? "تريد المنظومة الكاملة + التدقيق المجاني؟" : "Want the complete system + free audit?"}{" "}
                   <button
                     onClick={() => setTab("packages")}
                     className="text-apex-gold/60 hover:text-apex-gold underline underline-offset-4 transition-colors duration-200"
@@ -408,6 +561,8 @@ function PackageCard({
   pkg: ServicePackage; index: number; inView: boolean; popular?: boolean;
   lang: string; cta: string; badge: string; allFeatures: string[]; included: Set<number>;
 }) {
+  const isAr = lang === "ar";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -429,6 +584,7 @@ function PackageCard({
         {popular && <div className="absolute inset-0 bg-apex-gold/3 pointer-events-none" />}
 
         <div className="relative flex flex-col flex-1">
+
           <div className="mb-6">
             <h3 className={`text-apex-white mb-1 ${lang === "en" ? "font-serif text-3xl font-medium" : "text-xl font-bold"}`}>
               {lang === "ar" ? pkg.name_ar ?? pkg.name : pkg.name}
@@ -439,7 +595,7 @@ function PackageCard({
           <div className={`h-px mb-6 ${popular ? "bg-apex-gold/30" : "bg-apex-border"}`} />
 
           <div className="mb-6 p-4 bg-apex-black/40">
-            <p className={`text-apex-gold/80 text-sm ${lang === "ar" ? "leading-loose" : "leading-relaxed"}`}>
+            <p className={`text-apex-gold/80 text-sm ${isAr ? "leading-loose" : "leading-relaxed"}`}>
               {pkg.transformation}
             </p>
           </div>
@@ -474,6 +630,13 @@ function PackageCard({
         }`}>
           {cta}
         </a>
+
+        {/* Quiet audit note — below CTA */}
+        <p className={`mt-3 text-center text-[11.5px] text-apex-silver/35 ${isAr ? "leading-relaxed" : ""}`}>
+          {isAr
+            ? "✦ يشمل تدقيق الهوية المهنية الشامل مجاناً"
+            : "✦ Includes a free Career Identity Audit"}
+        </p>
       </div>
     </motion.div>
   );

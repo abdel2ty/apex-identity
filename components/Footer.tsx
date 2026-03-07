@@ -8,13 +8,31 @@ import { useLanguage } from "@/hooks/useLanguage";
 type SocialLink = {
   name: string;
   href: string;
-  icon: React.ReactNode; // بدل JSX.Element
+  icon: React.ReactNode;
 };
 
 type NavLink = {
   label: string;
   href: string;
 };
+
+// ─── Logo placeholder — replace the contents of this component with your SVG
+const ApexLogo = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    viewBox="0 0 120 40"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-label="Apex Identity"
+  >
+    {/* ↓↓↓ Replace everything inside this <svg> with your actual logo SVG content ↓↓↓ */}
+    <rect x="0.5" y="0.5" width="119" height="39" rx="1.5" stroke="currentColor" strokeOpacity="0.2" strokeDasharray="4 3" />
+    <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle" fill="currentColor" fontSize="10" fontFamily="serif" letterSpacing="3" opacity="0.4">
+      YOUR LOGO
+    </text>
+    {/* ↑↑↑ Replace above with your SVG ↑↑↑ */}
+  </svg>
+);
 
 export default function Footer() {
   const { t, lang } = useLanguage();
@@ -60,34 +78,27 @@ export default function Footer() {
 
   return (
     <footer className="bg-apex-black border-t border-apex-border/50 relative overflow-hidden">
-      {/* Top gold gradient line */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-apex-gold/40 to-transparent" />
-
-      {/* Subtle ambient glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-apex-gold/3 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+
           {/* Column 1: Brand */}
           <div className="lg:col-span-1">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="flex items-center gap-3 group mb-5 w-fit bg-transparent border-none outline-none cursor-none"
+              className="block mb-6 w-fit bg-transparent border-none outline-none cursor-none group"
               aria-label="Scroll to top"
             >
-              <div className="relative w-8 h-8 flex-shrink-0">
-                <div className="absolute inset-0 bg-apex-gold rotate-45 scale-75 group-hover:rotate-90 transition-transform duration-500" />
-                <div className="absolute inset-1 bg-apex-black rotate-45 scale-75" />
-              </div>
-              <span className="text-apex-white font-semibold tracking-widest text-sm uppercase">
-                Apex Identity
-              </span>
+              {/* Logo — swap ApexLogo with your SVG when ready */}
+              <ApexLogo className="h-9 w-auto text-apex-white group-hover:text-apex-gold transition-colors duration-300" />
             </button>
+
             <p className={`text-apex-silver/60 text-sm mb-6 ${lang === "ar" ? "leading-loose" : "leading-relaxed"}`}>
               {t.footer.tagline}
             </p>
 
-            {/* Social Icons */}
             <div>
               <p className="text-apex-silver/40 text-xs tracking-[0.2em] uppercase mb-4">
                 {t.footer.social_label}

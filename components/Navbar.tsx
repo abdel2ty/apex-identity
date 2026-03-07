@@ -4,6 +4,25 @@ import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/hooks/useLanguage";
 
+// ─────────────────────────────────────────────────────────────
+
+const ApexLogo = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    viewBox="0 0 120 40"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-label="Apex Identity"
+  >
+    {/* ↓↓↓ Replace everything inside this <svg> with your actual logo SVG content ↓↓↓ */}
+    <rect x="0.5" y="0.5" width="119" height="39" rx="1.5" stroke="currentColor" strokeOpacity="0.2" strokeDasharray="4 3" />
+    <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle" fill="currentColor" fontSize="10" fontFamily="serif" letterSpacing="3" opacity="0.4">
+      YOUR LOGO
+    </text>
+    {/* ↑↑↑ Replace above with your SVG ↑↑↑ */}
+  </svg>
+);
+
 export default function Navbar() {
   const { t, lang, setLang } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
@@ -45,6 +64,9 @@ export default function Navbar() {
     { label: t.nav.faq, href: "#faq" },
   ];
 
+  const otherLang = lang === "en" ? "ar" : "en";
+  const otherLangLabel = lang === "en" ? "العربية" : "English";
+
   return (
     <>
       <motion.header
@@ -60,19 +82,13 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
 
-            {/* Logo — smooth scroll to top, no page refresh */}
+            {/* Logo */}
             <button
               onClick={() => scrollTo("#top")}
-              className="flex items-center gap-3 group flex-shrink-0 bg-transparent border-none outline-none"
+              className="flex items-center group flex-shrink-0 bg-transparent border-none outline-none cursor-none"
               aria-label="Scroll to top"
             >
-              <div className="relative w-8 h-8">
-                <div className="absolute inset-0 bg-apex-gold rotate-45 scale-75 group-hover:rotate-90 transition-transform duration-500" />
-                <div className="absolute inset-1 bg-apex-black rotate-45 scale-75" />
-              </div>
-              <span className="text-apex-white font-semibold tracking-widest text-sm uppercase hidden sm:block">
-                Apex Identity
-              </span>
+              <ApexLogo className="h-8 w-auto text-apex-white group-hover:text-apex-gold transition-colors duration-300" />
             </button>
 
             {/* Desktop Nav */}
@@ -91,9 +107,10 @@ export default function Navbar() {
 
             {/* Right side */}
             <div className="flex items-center gap-4">
+
               {/* Language toggle */}
               <button
-                onClick={() => setLang(lang === "en" ? "ar" : "en")}
+                onClick={() => setLang(otherLang)}
                 className="text-apex-silver/50 hover:text-apex-gold text-xs tracking-[0.2em] uppercase transition-colors duration-200 cursor-none"
               >
                 {lang === "en" ? "AR" : "EN"}
@@ -163,17 +180,38 @@ export default function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.06, duration: 0.3 }}
                     onClick={() => scrollTo(link.href)}
-                    className="flex items-center gap-4 py-4 border-b border-apex-border/30 last:border-b-0 text-apex-silver hover:text-apex-white transition-colors duration-200 group bg-transparent border-none w-full text-left cursor-none"
+                    className="flex items-center gap-4 py-4 text-apex-silver hover:text-apex-white transition-colors duration-200 group bg-transparent border-none w-full text-left cursor-none"
                     style={{ borderBottom: i < navLinks.length - 1 ? "1px solid rgba(26,26,40,0.3)" : "none" }}
                   >
                     <span className="w-2 h-2 border border-apex-gold/30 rotate-45 group-hover:border-apex-gold/80 group-hover:bg-apex-gold/10 transition-all duration-200 flex-shrink-0" />
                     <span className="text-base font-medium">{link.label}</span>
                   </motion.button>
                 ))}
+
+                {/* Language toggle in mobile menu */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.24, duration: 0.3 }}
+                  className="py-4"
+                  style={{ borderBottom: "1px solid rgba(26,26,40,0.3)" }}
+                >
+                  <button
+                    onClick={() => { setLang(otherLang); setMenuOpen(false); }}
+                    className="flex items-center gap-3 text-apex-silver/60 hover:text-apex-gold transition-colors duration-200 bg-transparent border-none w-full text-left cursor-none"
+                  >
+                    <svg className="w-4 h-4 opacity-50" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.2">
+                      <circle cx="8" cy="8" r="6.5" />
+                      <path d="M8 1.5c-1.8 2-2.8 3.9-2.8 6.5s1 4.5 2.8 6.5M8 1.5c1.8 2 2.8 3.9 2.8 6.5s-1 4.5-2.8 6.5M1.5 8h13" strokeLinecap="round" />
+                    </svg>
+                    <span className="text-sm">{otherLangLabel}</span>
+                  </button>
+                </motion.div>
+
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.28, duration: 0.3 }}
+                  transition={{ delay: 0.3, duration: 0.3 }}
                   className="pt-5 pb-2"
                 >
                   <button
